@@ -1,3 +1,6 @@
 [submodule "MLX42"]
 	path = MLX42
 	url = https://github.com/codam-coding-college/MLX42.git
+[submodule "42-Kit"]
+	path = 42-Kit
+	url = git@github.com:brenohildebrand/42-Kit.git
