@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brenohildebrand <brenohildebrand@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/24 04:01:05 by brenohildeb      ###   ########.fr       */
+/*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
+/*   Updated: 2023/10/24 03:58:01 by brenohildeb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#ifndef FDF_H
+# define FDF_H
 
-int	main(int argc, char *argv[])
-{
-	t_map	map;
+typedef struct s_map {
+		
+}	t_map;
 
-	validate_args(argc, argv);
-	read_the_map(map, argv[1]);
-	render_the_map(map);
-	return (0);
-}
+
+
+#endif
