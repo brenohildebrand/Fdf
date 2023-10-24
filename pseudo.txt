@@ -19,30 +19,45 @@ main
         {
             literally open the file with open (2) 
         }
-        read the file
+        read the file till the end
         {
             read lines of the file
         }
-    }
         close the file
-            check format of the file
-            check if the width is the same for all lines
+        {
+            literally close the file
+        }
+    }
     parse the file
+    {
         split buffer by lines
         split buffers by space
         assign values to matrix
+    }
     render the matrix
+    {
         create window
         prepare matrix
+        {
             apply scale
+            {
                 calculate the scale
                 multiply every node of the file by the scale
+            }
             apply rotation
+            {
                 apply rotation on z
                 apply rotation on x
+            }
             apply centralization
+            {
                 calculate centralization
                 apply centralization for each cell of the map 
+            }
+        }
         draw matrix
+        {
             for each point draw lines to the next point and mark it's been drawn
+        }
+    }
 }
