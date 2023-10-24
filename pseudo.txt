@@ -8,7 +8,8 @@ Fdf
     1.1 - open the file [path, fd]
     1.2 - read the file [fd, map]
         1.2.1 - read lines of the file [fd, map]
-    1.3 - check the file [map]
+    1.3 - close the file
+    1.4 - check the file [map]
 2 - render the map [map, mlx]
     2.1 - apply scale [map]
         2.1.1 - calculate the scale
