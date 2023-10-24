@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brenohildebrand <brenohildebrand@studen    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/24 13:54:10 by brenohildeb      ###   ########.fr       */
+/*   Updated: 2023/10/24 16:31:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "fdf.h"
 
 int	main(int argc, char *argv[])
 {
-	t_map	map;
-
 	validate_args(argc, argv);
-	read_the_map(&map, argv[1]);
-	render_the_map(&map);
-	return (0);
 }

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   validate_argc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brenohildebrand <brenohildebrand@studen    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 03:58:38 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/10/24 03:58:51 by brenohildeb      ###   ########.fr       */
+/*   Created: 2023/10/24 16:20:31 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/24 16:32:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+
 void	validate_argc(int argc)
 {
-	
+	if (argc != 2)
+	{
+		write(1, "Invalid number of arguments.\n", 29);
+		exit(1);
+	}
 }

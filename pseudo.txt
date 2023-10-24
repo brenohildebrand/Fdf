@@ -1,24 +1,48 @@
 Fdf
 
-[map]
-0 - validate args [argc, argv]
-    0.1 - validate argc [argc]
-    0.2 - validate argv [argv]
-1 - read the map [map, path, fd]
-    1.1 - open the file [path, fd]
-    1.2 - read the file [fd, map]
-        1.2.1 - read lines of the file [fd, map]
-    1.3 - close the file
-    1.4 - check the file [map]
-2 - render the map [map, mlx]
-    2.1 - apply scale [map]
-        2.1.1 - calculate the scale
-        2.1.2 - multiply every node of the file by the scale
-    2.2 - apply rotation (first on z, then on x) [map]
-        2.2.1 - apply rotation on z [map]
-        2.2.2 - apply rotation on x [map]
-    2.3 - apply centralization [map]
-        2.3.1 - calculate centralization
-        2.3.2 - apply centralization for each cell of the map 
-    2.4 - draw lines [map, mlz]
-        2.3.1 - for each point draw lines to the next point and mark it's been drawn
+main
+{
+    validate args
+    {
+        validate argc
+        {
+            argc must be 2 (the program name and a map)
+        }
+        validate argv format
+        {
+            argv[1] must match *.fdf 
+        }
+    }
+    read the file
+    {
+        open the file
+        {
+            literally open the file with open (2) 
+        }
+        read the file
+        {
+            read lines of the file
+        }
+    }
+        close the file
+            check format of the file
+            check if the width is the same for all lines
+    parse the file
+        split buffer by lines
+        split buffers by space
+        assign values to matrix
+    render the matrix
+        create window
+        prepare matrix
+            apply scale
+                calculate the scale
+                multiply every node of the file by the scale
+            apply rotation
+                apply rotation on z
+                apply rotation on x
+            apply centralization
+                calculate centralization
+                apply centralization for each cell of the map 
+        draw matrix
+            for each point draw lines to the next point and mark it's been drawn
+}
