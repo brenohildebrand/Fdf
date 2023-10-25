@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   store_number_in_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:54:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/10/25 00:50:07 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/25 00:54:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-int	main(int argc, char *argv[])
+void	store_number_in_map(t_llist **map, int x, int y, int z)
 {
-	char	*file;
-	t_llist	*map;
+	(*map) = malloc(sizeof(t_llist));
+	(*map)->point.x = x;
+	(*map)->point.y = y;
+	(*map)->point.z = z;
+	
+	// map now should be the next ...
+	// bug
 
-	validate_args(argc, argv);
-	read_the_file(&file, argv[1]); 
-	parse_the_file(&map, file);
-	// render_the_map(); 
-	printf("%s\n", file);
 	return(0);
 }

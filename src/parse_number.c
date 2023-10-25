@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_number.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:54:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/10/25 00:42:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/25 00:49:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
+#include <unistd.h>
 
-int	main(int argc, char *argv[])
+void	parse_number(t_llist **map, char **file, int *x, int *y)
 {
-	char	*file;
-	t_llist	*map;
+	int	number;
 
-	validate_args(argc, argv);
-	read_the_file(&file, argv[1]); 
-	parse_the_file(&map, file);
-	// render_the_map(); 
-	printf("%s\n", file);
-	return(0);
+	number = 0;
+	if ((*(*file)) < '0' || (*(*file)) > '9')
+	{
+		write(1, "Digit was expected, but got another character.\n", 47);
+		exit(1);
+	}
+	while ((*(*file)) >= '0' && (*(*file)) <= '9')
+	{
+		number *= 10;
+		number += (*(*file)) - '0';
+		(*file)++;
+	}
+	store_number_in_map(map, *x, *y, number);
 }

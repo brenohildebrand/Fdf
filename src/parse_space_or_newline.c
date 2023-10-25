@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_space_or_newline.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:54:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/10/25 00:36:28 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/25 00:42:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
+#include <unistd.h>
 
-int	main(int argc, char *argv[])
+void	parse_space_or_newline(char **file, int *x, int *y, int line_size)
 {
-	char	*file;
-	t_llist	*map;
-
-	validate_args(argc, argv);
-	read_the_file(&file, argv[1]); 
-	parse_the_file(&map, file);
-	// render_the_map(); 
-	printf("%s\n", file);
-	return(0);
+	if ((*(*file)) == '\n')
+	{
+		if (*x != line_size)
+		{
+			write(1, "Each line should have the same size.\n", 37);		
+			exit(1);
+		}
+		(*y)++;
+	}
+	else if ((*(*file)) != ' ')
+	{
+		write(1, "A space was expected, but got another character.\n", 49);
+		exit(1);
+	}
+	(*file)++;
 }

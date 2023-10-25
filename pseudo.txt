@@ -30,9 +30,24 @@ main
     }
     parse the file
     {
-        split buffer by lines
-        split buffers by space
-        assign values to matrix
+        while (1)
+        {
+            handle_number()
+            {
+                if (not digit)
+                    error
+                while (digit)
+                    mount number
+                store number in map
+            }
+            if (newline)
+            {
+                if (x != line_size)
+                    error
+                y++;
+            }
+            i++;
+        }
     }
     render the matrix
     {

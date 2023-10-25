@@ -1,0 +1,3 @@
+[submodule "42-Kit"]
+	path = 42-Kit
+	url = git@github.com:brenohildebrand/42-Kit.git
