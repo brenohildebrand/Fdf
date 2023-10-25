@@ -6,18 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:14:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:39:07 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:44:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-static int	is_digit(char c)
-{
-	return (c >= '0' && c <= '9');	
-}
 
 static int	get_line_size(char *file)
 {

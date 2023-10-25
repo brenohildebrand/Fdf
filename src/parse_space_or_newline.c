@@ -6,11 +6,12 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 00:36:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:42:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:43:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 
 void	parse_space_or_newline(char **file, int *x, int *y, int line_size)
 {

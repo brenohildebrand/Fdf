@@ -6,11 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 00:42:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 00:49:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:42:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 void	parse_number(t_llist **map, char **file, int *x, int *y)
 {
