@@ -2,6 +2,7 @@
 	"files.associations": {
 		"basic.h": "c",
 		"unistd.h": "c",
-		"avltree.h": "c"
+		"avltree.h": "c",
+		"rmanager.h": "c"
 	}
 }
