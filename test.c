@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/26 21:48:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:11:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_i32	main(void)
 	// insert_rmanager(&rmanager, (t_usize)name);
 	// destroy_rmanager(&rmanager);
 
-
+	print("[ TESTING PRINT ]");
+	rmanager = NULL; 
 	for (int i = 1; i < 10001; i++)
 		insert_rmanager(&rmanager, (t_usize)malloc(i));
 	destroy_rmanager(&rmanager);
