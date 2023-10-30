@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:24:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/24 16:33:48 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/30 04:38:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../kit/actions/actions.h"
 #include <stdlib.h>
 
 void	validate_argv(char *argv[])
@@ -25,7 +25,7 @@ void	validate_argv(char *argv[])
 		argv[1][last_index - 3] != 'f' ||
 		argv[1][last_index - 4] != '.')
 	{
-		write(1, "The file given does not end in .fdf.\n", 37);
+		print("The given file does not end in .fdf.");
 		exit(1);
 	}
 }
