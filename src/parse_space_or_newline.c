@@ -5,29 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 00:36:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/25 11:43:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/10/30 19:44:10 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/31 00:05:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "fdf.h"
+#include "../kit/types/vec2.h"
+#include "../kit/actions/actions.h"
 
-void	parse_space_or_newline(char **file, int *x, int *y, int line_size)
-{
-	if ((*(*file)) == '\n')
+void	parse_space_or_newline(
+	t_file file, 
+	t_map map, 
+	t_vec2 coordinates, 
+	t_u32 *index
+){
+	t_u8	current_character;
+
+	current_character = file->buffer->data[*index];
+	while (current_character == ' ')
 	{
-		if (*x != line_size)
+		(*index)++;
+		current_character = file->buffer->data[*index];
+	}
+	if (current_character == '\n' || current_character == '\0')
+	{
+		if (map->width == 0)
 		{
-			write(1, "Each line should have the same size.\n", 37);		
-			exit(1);
+			map->width = coordinates->x;
 		}
-		(*y)++;
+		if (coordinates->x != map->width)
+		{
+			print("[PARSER] Each line should have the same amount of points.");
+			sexit(1);
+		}
+		if (current_character == '\n')
+			(*index)++;
 	}
-	else if ((*(*file)) != ' ')
-	{
-		write(1, "A space was expected, but got another character.\n", 49);
-		exit(1);
-	}
-	(*file)++;
 }

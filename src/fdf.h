@@ -6,36 +6,49 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/10/25 11:44:27 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/10/31 00:31:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-typedef struct s_vec3 {
-	int	x;
-	int	y;
-	int	z;
-}	t_vec3;
+# include "../kit/types/file.h"
+# include "../kit/types/vec2.h"
+# include "../kit/types/vec3.h"
+# include "../kit/types/vec3_vector.h"
+# include "../kit/types/rgba.h"
+# include "../kit/types/rgba_vector.h"
 
-typedef struct s_llist {
-	t_vec3			point;
-	struct s_llist	*next;
-}	t_llist;
+typedef struct s_map			*t_map;
+typedef struct s_point			*t_point;
+typedef struct s_point_vector	*t_point_vector;
+
+struct s_map {
+	t_rgba_vector	color;
+	t_vec3_vector	position;
+	t_i32			width;	
+	t_i32			height;
+};
+
+void	init_map(t_map *map);
 
 void	validate_args(int argc, char *argv[]);
 void	validate_argc(int argc);
 void	validate_argv(char *argv[]);
 
-void	read_the_file(char **file, char *path);
-void	open_the_file(int *fd, char *path);
-void	read_the_file_till_the_end(int *fd, char **file);
-void	close_the_file(int *fd);
+void	parse_file(t_file file, t_map map);
+void	parse_space_or_newline(
+	t_file file, 
+	t_map map, 
+	t_vec2 coordinates, 
+	t_u32 *index);
+void	parse_number_and_color(
+	t_file file,
+	t_map map,
+	t_vec2 coordinates,
+	t_u32 *index);
 
-void	parse_the_file(t_llist **map, char *file);
-void	parse_number(t_llist **map, char **file, int *x, int *y);
-void	parse_space_or_newline(char **file, int *x, int *y, int line_size);
-void	store_number_in_map(t_llist **map, int x, int y, int z);
+void	render_map(t_map map);
 
 #endif

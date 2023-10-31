@@ -3,6 +3,7 @@
 		"basic.h": "c",
 		"unistd.h": "c",
 		"avltree.h": "c",
-		"rmanager.h": "c"
+		"rmanager.h": "c",
+		"vec3_vector.h": "c"
 	}
 }

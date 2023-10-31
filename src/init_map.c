@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_the_file.c                                    :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 17:22:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/24 18:26:39 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/10/30 14:29:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/10/30 19:08:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "../kit/actions/actions.h"
+#include "fdf.h"
 
-void	open_the_file(int *fd, char *path)
+void	init_map(t_map *map)
 {
-	*fd = open(path, O_RDONLY);
-	if (*fd == -1)
-	{
-		perror("Oh no!");
-		write(1, "Couldn't open the file.\n", 24);
-		exit(1);
-	}
+	(*map) = smalloc(sizeof(struct s_map));
+	init_rgba_vector(&(*map)->color);
+	init_vec3_vector(&(*map)->position);
+	(*map)->height = 0;
+	(*map)->width = 0;
 }
