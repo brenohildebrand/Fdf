@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:12:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/31 01:14:10 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:00:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ void	render_map(t_map map)
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		sexit(1);
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+	// mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+	// scale
+	// rotate
+	// centralize
+	// draw lines
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 }
