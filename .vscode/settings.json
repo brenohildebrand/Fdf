@@ -4,6 +4,7 @@
 		"unistd.h": "c",
 		"avltree.h": "c",
 		"rmanager.h": "c",
-		"vec3_vector.h": "c"
+		"vec3_vector.h": "c",
+		"actions.h": "c"
 	}
 }

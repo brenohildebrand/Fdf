@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_argc.c                                    :+:      :+:    :+:   */
+/*   move_to_origin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 16:20:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/30 04:37:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/11/04 13:06:50 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/11/04 13:08:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../kit/actions/actions.h"
-#include <unistd.h>
-#include <stdlib.h>
+#include "fdf.h"
 
-void	validate_argc(int argc)
+void	move_to_origin(t_map map, struct s_point *p)
 {
-	if (argc != 2)
-	{
-		print("Invalid number of arguments.");
-		exit(1);
-	}
+	p->position.x -= (map->width / 2) * 50;
+	p->position.y += (map->width / 2) * 50;
 }

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   move_back_from_origin.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:53:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 15:11:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/11/04 13:09:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/11/04 13:10:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../kit/types/basic.h"
-#include "../kit/types/file.h"
-#include "../kit/actions/actions.h"
 #include "fdf.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-t_u8	main(int argc, char *argv[])
+void	move_back_from_origin(t_map map, struct s_point *p)
 {
-	t_fdf	fdf;
-
-	init_fdf(&fdf);
-	validate_args(argc, argv);
-	read_file(fdf->file, argv[1]);
-	parse_file(fdf->file, fdf->map);
-	render_map(fdf);
-	sexit(0);	
+	p->position.x += (map->width / 2) * 50;
+	p->position.y += (map->width / 2) * 50;
 }

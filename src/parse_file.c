@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/31 00:31:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:41:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	parse_file(t_file file, t_map map)
 	init_vec2(&coordinates);
 	while (file->buffer->data[index])
 	{
-		parse_number_and_color(file, map, coordinates, &index);
-		parse_space_or_newline(file, map, coordinates, &index);
-		if (map->width != 0 && coordinates->x == map->width)	
+		handle_number_and_color(file, map, coordinates, &index);
+		handle_space_or_newline(file, map, coordinates, &index);
+		if (map->width != 0 && coordinates->x == map->width - 1)	
 		{
 			coordinates->x = 0;
 			coordinates->y++;
@@ -34,5 +34,6 @@ void	parse_file(t_file file, t_map map)
 		else
 			coordinates->x++;
 	}
-	map->height = coordinates->y - 1;
+	map->height = coordinates->y;
 }
+

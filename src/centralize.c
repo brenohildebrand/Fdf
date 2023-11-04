@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_argv.c                                    :+:      :+:    :+:   */
+/*   centralize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 16:24:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/30 04:38:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/11/04 13:11:53 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/11/04 13:13:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../kit/actions/actions.h"
-#include <stdlib.h>
+#include "fdf.h"
 
-void	validate_argv(char *argv[])
+void	centralize(t_map map, struct s_point *p)
 {
-	int	last_index;
-
-	last_index = 0;
-	while (argv[1][last_index] != '\0')
-		last_index++;
-	if (argv[1][last_index - 1] != 'f' ||
-		argv[1][last_index - 2] != 'd' ||
-		argv[1][last_index - 3] != 'f' ||
-		argv[1][last_index - 4] != '.')
-	{
-		print("The given file does not end in .fdf.");
-		exit(1);
-	}
+	p->position.x += (1920 - (map->width * 50)) / 2;
+	p->position.y += (1080 - (map->height * 50)) / 2;
 }

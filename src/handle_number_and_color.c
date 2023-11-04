@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:17:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/10/31 00:30:57 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:42:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,43 @@ static void	push_point(t_map map, t_vec2 coordinates, t_i32 z, struct s_rgba col
 		.z = z,
 	});
 }
+static t_u8	hex_letter_to_number(t_u8 letter)
+{
+	if (letter >= '0' && letter <= '9')
+		return (letter - '0');
+	else if (letter >= 'a' && letter <= 'f')
+		return (letter - 'a');
+	else if (letter >= 'A' && letter <= 'F')
+		return (letter - 'A');
+	else
+	{
+		print("[PARSER] Hex character expected.");
+		sexit(1);
+	}	
+}
 
 static struct s_rgba	parse_color(t_file file, t_u32 *index)
 {
-	t_u8			current_character;	
+	t_u8			current_character;
 	struct s_rgba	color;
 	
-	// TODO: parse color in the format 0xffffff or 0xFFFFFF
-	print("TODO: parse colors.");
-	sexit(1);
-	
+	if (file->buffer->data[*index + 1] != '0' || file->buffer->data[*index + 2] != 'x')
+	{		
+		print("[PARSER] \"0x\" was expected after ','.");
+		sexit(1);	
+	}
+	color.r = hex_letter_to_number(file->buffer->data[*index + 3]) * 16 + 
+			  hex_letter_to_number(file->buffer->data[*index + 4]) * 1;
+	color.g = hex_letter_to_number(file->buffer->data[*index + 5]) * 16 + 
+			  hex_letter_to_number(file->buffer->data[*index + 6]) * 1;
+	color.b = hex_letter_to_number(file->buffer->data[*index + 7]) * 16 + 
+			  hex_letter_to_number(file->buffer->data[*index + 8]) * 1;
+	color.a = hex_letter_to_number(file->buffer->data[*index + 9]) * 16 + 
+			  hex_letter_to_number(file->buffer->data[*index + 10]) * 1;
 	return (color);
 }
 
-void	parse_number_and_color(
+void	handle_number_and_color(
 	t_file file,
 	t_map map,
 	t_vec2 coordinates,
