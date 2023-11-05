@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/11/04 15:44:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:00:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_map			*t_map;
 typedef struct s_properties		*t_properties;
 typedef struct s_extra			*t_extra;
 typedef struct s_point			*t_point;
+typedef struct s_coordinates2D	*t_coordinates2D;
 
 struct s_fdf {
 	mlx_t			*mlx;
@@ -43,9 +44,9 @@ struct s_map {
 };
 
 struct s_properties {
-	struct s_vec3	location;
-	struct s_vec3	rotation;
-	struct s_vec3	scale;
+	t_vec3	location;
+	t_vec3	rotation;
+	t_vec3	scale;
 };
 
 struct s_extra {
@@ -58,19 +59,18 @@ struct s_point {
 	struct s_vec3	position;
 };
 
+struct s_coordinates2D {
+	t_i32	x;
+	t_i32	y;
+};
+
 /* old */
 void	drawline(mlx_image_t *img, struct s_point p0, struct s_point p1);
 void	bresenham(mlx_image_t *img, struct s_point p0, struct s_point p1);
-void	rotate_isometric(struct s_point *p);
-void	scale(struct s_point *p);
-void	move_back_from_origin(t_map map, struct s_point *p);
-void	move_to_origin(t_map map, struct s_point *p);
-void	normalize_z(struct s_point *p);
-void	centralize(t_map map, struct s_point *p);
 
 /* main functions */
 void	validate_args(int argc, char *argv[]);
-void	parse_file(t_file file, t_map map);
+void	parse_file(t_fdf fdf);
 void	render_map(t_fdf fdf);
 
 /* helper functions */
@@ -81,12 +81,19 @@ void	init_properties(t_properties *properties);
 void	handle_space_or_newline(
 	t_file file, 
 	t_map map, 
-	t_vec2 coordinates, 
+	t_coordinates2D coordinates, 
 	t_u32 *index);
 void	handle_number_and_color(
 	t_file file,
 	t_map map,
-	t_vec2 coordinates,
+	t_coordinates2D coordinates,
 	t_u32 *index);
+void	normalize_z(t_fdf fdf, t_point p);
+void	scale(t_fdf fdf, t_point p);
+void	move_to_origin(t_fdf fdf, t_point p);
+void	rotate_isometric(t_fdf fdf, t_point p);
+void	move_back_from_origin(t_fdf fdf, t_point p);
+void	centralize(t_fdf fdf, t_point p);
+void	control_key_up(t_fdf fdf);
 
 #endif

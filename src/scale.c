@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:01:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/03 16:03:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:37:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 
-void	scale(struct s_point *p)
+void	scale(t_fdf fdf, t_point p)
 {
 	p->position.x *= 50;
 	p->position.y *= 50;

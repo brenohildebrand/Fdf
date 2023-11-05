@@ -6,11 +6,12 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:19:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 14:19:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:29:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "../kit/actions/actions.h"
 
 void	validate_argv(char *argv[])
 {
@@ -25,7 +26,7 @@ void	validate_argv(char *argv[])
 		argv[1][last_index - 4] != '.')
 	{
 		print("The given file does not end in .fdf.");
-		exit(1);
+		sexit(1);
 	}
 }
 
@@ -34,7 +35,7 @@ void	validate_argc(int argc)
 	if (argc != 2)
 	{
 		print("Invalid number of arguments.");
-		exit(1);
+		sexit(1);
 	}
 }
 

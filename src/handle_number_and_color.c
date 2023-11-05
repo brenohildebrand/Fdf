@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_number_and_color.c                           :+:      :+:    :+:   */
+/*   handle_number_and_color.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:17:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 15:42:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:15:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../kit/types/rgb.h"
 #include "fdf.h"
 
-static void	push_point(t_map map, t_vec2 coordinates, t_i32 z, struct s_rgba color)
+static void	push_point(t_map map, t_coordinates2D coordinates, t_i32 z, struct s_rgba color)
 {
 	push_rgba_vector(map->color, (struct s_rgba){
 		.r = 0xFF,
@@ -70,7 +70,7 @@ static struct s_rgba	parse_color(t_file file, t_u32 *index)
 void	handle_number_and_color(
 	t_file file,
 	t_map map,
-	t_vec2 coordinates,
+	t_coordinates2D coordinates,
 	t_u32 *index
 ){
 	t_i32			number;	

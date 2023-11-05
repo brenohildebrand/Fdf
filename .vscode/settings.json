@@ -5,6 +5,8 @@
 		"avltree.h": "c",
 		"rmanager.h": "c",
 		"vec3_vector.h": "c",
-		"actions.h": "c"
+		"actions.h": "c",
+		"math.h": "c",
+		"vec3.h": "c"
 	}
 }

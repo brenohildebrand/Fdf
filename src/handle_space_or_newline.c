@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:44:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 15:42:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:59:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	handle_space_or_newline(
 	t_file file, 
 	t_map map, 
-	t_vec2 coordinates, 
+	t_coordinates2D coordinates, 
 	t_u32 *index
 ){
 	t_u8	current_character;

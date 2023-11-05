@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   control_up_key.c                                   :+:      :+:    :+:   */
+/*   control_key_up.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 13:23:20 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 13:23:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2023/11/04 17:51:00 by bhildebr          #+#    #+#             */
+/*   Updated: 2023/11/04 17:58:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	control_up_key()
+void	control_key_up(t_fdf fdf)
 {
-		
+	fdf->properties->rotation->x += 3;	
 }

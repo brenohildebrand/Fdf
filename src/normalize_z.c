@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 13:17:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 13:18:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:47:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	normalize_z(struct s_point *p)
+void	normalize_z(t_fdf fdf, t_point p)
 {
-	p->position.z *= 10;
-	p->position.z *= 10;
+	p->position.z *= 5;
+	p->position.z *= 5;
 }
