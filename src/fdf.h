@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/11/04 21:00:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:46:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_coordinates2D	*t_coordinates2D;
 
 struct s_fdf {
 	mlx_t			*mlx;
+	mlx_image_t		*img;
 	t_map			map;	
 	t_file			file;
 	t_properties	properties;
@@ -94,6 +95,7 @@ void	move_to_origin(t_fdf fdf, t_point p);
 void	rotate_isometric(t_fdf fdf, t_point p);
 void	move_back_from_origin(t_fdf fdf, t_point p);
 void	centralize(t_fdf fdf, t_point p);
-void	control_key_up(t_fdf fdf);
+void	rotate(t_fdf fdf, t_point p);
+void	draw_background(mlx_image_t *img);
 
 #endif

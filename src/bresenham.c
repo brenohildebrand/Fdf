@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:37:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 17:49:54 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:54:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,30 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../kit/actions/actions.h"
+#include <unistd.h>
 
 void	bresenham(mlx_image_t *img, struct s_point p0, struct s_point p1)
 {
-	t_i32	dx;
-	t_i32	dy;
-	t_i32	sx;
-	t_i32	sy;
-	t_i32	err;
-	t_i32	e2;
+	t_f64	x;
+	t_f64	y;
+	t_f64	dx;
+	t_f64	dy;
+	t_f64	xIncrement;
+	t_f64	yIncrement;
+	t_i32	num_steps;
 
-	// printf(
-		// "From (%d, %d) to (%d, %d)\n",
-		// p0.position.x, p0.position.y,
-		// p1.position.x, p1.position.y);
-	dx = abs(p1.position.x - p0.position.x);
-	dy = - abs(p1.position.y - p0.position.y);	
-	if (p0.position.x < p1.position.x)
-		sx = 1;
-	else
-		sx = -1;
-	if (p0.position.y < p1.position.y)
-		sy = 1;
-	else
-		sy = -1;
-	err = dx + dy;
-	while (1)
+	dx = p1.position.x - p0.position.x;
+	dy = p1.position.y - p0.position.y;
+	num_steps = (t_i32)round(fmax(fabs(dx), fabs(dy)));
+	xIncrement = dx / num_steps;
+	yIncrement = dy / num_steps;
+	x = p0.position.x;
+	y = p0.position.y;
+	for (int i = 0; i <= num_steps; i++)
 	{
-		// printf("Pixel at (%d, %d)\n", p0.position.x, p0.position.y);
-		mlx_put_pixel(img, abs(p0.position.x), abs(p0.position.y), 0xFF0000FF);
-		if (p0.position.x == p1.position.x && p0.position.y == p1.position.y)
-			break;
-		e2 = 2 * err;
-		if (e2 >= dy)
-		{
-			err += dy;
-			p0.position.x += sx;
-		}
-		if (e2 <= dx)
-		{
-			err += dx;
-			p0.position.y += sy;
-		}
+		mlx_put_pixel(img, x, y, 0xFF0000FF);
+		x += xIncrement;
+		y += yIncrement;
 	}
 }
