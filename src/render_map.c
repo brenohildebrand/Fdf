@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:12:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/06 12:01:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:34:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,23 @@ static void	foreach_point(t_fdf fdf)
 
 void	ft_hook(void *param)
 {
-	static struct s_vec3	speed = {.x = 15, .y = 15, .z = 15};
+	static struct s_vec3	rotation_speed = {.x = 30, .y = 30, .z = 30};
 	t_fdf					fdf;
 
 	fdf = (t_fdf)param;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fdf->mlx);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_UP))
-		fdf->properties->rotation->x += fdf->mlx->delta_time * speed.x;
+		fdf->properties->rotation->x += fdf->mlx->delta_time * rotation_speed.x;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_DOWN))
-		fdf->properties->rotation->x -= fdf->mlx->delta_time * speed.x;
+		fdf->properties->rotation->x -= fdf->mlx->delta_time * rotation_speed.x;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_RIGHT))
-		fdf->properties->rotation->y += fdf->mlx->delta_time * speed.y;
+		fdf->properties->rotation->y += fdf->mlx->delta_time * rotation_speed.y;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT))
-		fdf->properties->rotation->y -= fdf->mlx->delta_time * speed.y;
+		fdf->properties->rotation->y -= fdf->mlx->delta_time * rotation_speed.y;
 	draw_background(fdf->img);
 	foreach_point(fdf);
-}
+}double		delta_time;
 
 void	render_map(t_fdf fdf)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 20:59:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:28:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	parse_file(t_fdf fdf)
 	(*coordinates) = (struct s_coordinates2D){.x = 0, .y = 0};
 	while (fdf->file->buffer->data[index])
 	{
+		handle_space_and_newline(fdf->file, fdf->map, coordinates, &index);
 		handle_number_and_color(fdf->file, fdf->map, coordinates, &index);
-		handle_space_or_newline(fdf->file, fdf->map, coordinates, &index);
+		handle_space_and_newline(fdf->file, fdf->map, coordinates, &index);
 		if (fdf->map->width != 0 && coordinates->x == fdf->map->width - 1)	
 		{
 			coordinates->x = 0;
@@ -36,5 +37,6 @@ void	parse_file(t_fdf fdf)
 			coordinates->x++;
 	}
 	fdf->map->height = coordinates->y;
+	sfree(coordinates);
 }
 

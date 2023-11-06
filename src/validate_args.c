@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:19:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 17:29:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:43:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	validate_argv(char *argv[])
 		argv[1][last_index - 3] != 'f' ||
 		argv[1][last_index - 4] != '.')
 	{
-		print("The given file does not end in .fdf.");
+		print((t_u8 *)"The given file does not end in .fdf.");
 		sexit(1);
 	}
 }
@@ -34,7 +34,7 @@ void	validate_argc(int argc)
 {
 	if (argc != 2)
 	{
-		print("Invalid number of arguments.");
+		print((t_u8 *)"Invalid number of arguments.");
 		sexit(1);
 	}
 }

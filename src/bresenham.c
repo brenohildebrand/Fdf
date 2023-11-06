@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:37:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/06 11:54:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:31:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	bresenham(mlx_image_t *img, struct s_point p0, struct s_point p1)
 	y = p0.position.y;
 	for (int i = 0; i <= num_steps; i++)
 	{
-		mlx_put_pixel(img, x, y, 0xFF0000FF);
+		put_valid_pixel(img, x, y, 0xFF0000FF);
 		x += xIncrement;
 		y += yIncrement;
 	}

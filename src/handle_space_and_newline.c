@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_space_or_newline.c                          :+:      :+:    :+:   */
+/*   handle_space_and_newline.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:44:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/04 20:59:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:21:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../kit/types/vec2.h"
 #include "../kit/actions/actions.h"
 
-void	handle_space_or_newline(
+void	handle_space_and_newline(
 	t_file file, 
 	t_map map, 
 	t_coordinates2D coordinates, 
@@ -24,10 +24,7 @@ void	handle_space_or_newline(
 
 	current_character = file->buffer->data[*index];
 	while (current_character == ' ')
-	{
-		(*index)++;
-		current_character = file->buffer->data[*index];
-	}
+		current_character = file->buffer->data[++(*index)];
 	if (current_character == '\n' || current_character == '\0')
 	{
 		if (map->width == 0)
@@ -36,10 +33,14 @@ void	handle_space_or_newline(
 		}
 		if (coordinates->x != map->width - 1)
 		{
-			print("[PARSER] Each line should have the same amount of points.");
+			print((t_u8 *)"[PARSER] Each line should have the same amount of points.");
 			sexit(1);
 		}
-		if (current_character == '\n')
-			(*index)++;
+	}
+	if (current_character == '\n')
+	{
+		(*index)++;
+		while (current_character == ' ')
+			current_character = file->buffer->data[++(*index)];
 	}
 }
