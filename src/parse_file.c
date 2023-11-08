@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/08 10:41:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:09:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	next_color_update(t_fdf fdf)
 	next_character = next_file();
 	color = 0;
 	current_character = next_file();
-	while (current_character != ' ')
+	while (current_character != ' ' && current_character != '\n' && current_character != '\0')
 	{
 		next_character = next_file();
 		color <<= 8;
@@ -58,7 +58,7 @@ static void	next_color_update(t_fdf fdf)
 }
 
 static void	next_number_update(
-	t_fdf fdf, 
+	t_fdf fdf,
 	t_coordinates2D coords
 ){
 	t_u8	current_character;
@@ -68,14 +68,18 @@ static void	next_number_update(
 	current_character = current_file();
 	signal = 1;
 	if (current_character == '-')
+	{
 		signal = -1;
+		current_character = next_file();
+	}
 	number = 0;
 	while (current_character >= '0' && current_character <= '9')
 	{
 		number *= 10;
 		number += current_character - '0';
-		current_character = next_file(); 
+		current_character = next_file();
 	}
+	number *= signal;
 	push_vec3_vector(fdf->map->position, (struct s_vec3){
 		.x = coords->x, .y = coords->y, .z = number
 	});
@@ -111,16 +115,17 @@ void	parse_file(t_fdf fdf)
 			if (current_character != ' ')
 			{
 				next_number_update(fdf, coords);
+				current_character = current_file();
 				if (current_character == ',')
 					next_color_update(fdf);
 				current_character = current_file();
 			}
 			else
-				current_character = next_file();		
+				current_character = next_file();
 		}
 		end_line_update(fdf, coords);
 		current_character = next_file();
 	}
 	fdf->map->height = coords->y;
-	destroy_coordinates2D(&coords);	
+	destroy_coordinates2D(&coords);
 }

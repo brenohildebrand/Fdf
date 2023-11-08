@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:12:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/06 16:34:48 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:26:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,7 @@ static void	transform_and_draw(t_fdf fdf, t_u32 p0_index, t_u32 p1_index)
 	bresenham(fdf->img, p0, p1);
 }
 
-static void	foreach_pair(t_fdf fdf, t_u32 x, t_u32 y)
-{
-	t_u32	p0_index;
-	t_u32	p1_index;
-	t_u32	p2_index;
-	
-	p0_index = x + y * fdf->map->width;
-	if (x + 1 < fdf->map->width)
-	{
-		p1_index = x + 1 + y * fdf->map->width;
-		transform_and_draw(fdf, p0_index, p1_index);
-	}
-	if (y + 1 < fdf->map->height)
-	{
-		p2_index = x + (y + 1) * fdf->map->width;
-		transform_and_draw(fdf, p0_index, p2_index);
-	}
-}
-
-static void	foreach_point(t_fdf fdf)
+static void	draw_wireframe(t_fdf fdf)
 {
 	t_u32	x;
 	t_u32	y;
@@ -76,14 +57,23 @@ static void	foreach_point(t_fdf fdf)
 		x = 0;
 		while(x < fdf->map->width)
 		{
-			foreach_pair(fdf, x, y);
+			if (x + 1 < fdf->map->width)
+				transform_and_draw(
+					fdf, 
+					x + y * fdf->map->width, 
+					x + 1 + y * fdf->map->width);
+			if (y + 1 < fdf->map->height)
+				transform_and_draw(
+					fdf, 
+					x + y * fdf->map->width, 
+					x + (y + 1) * fdf->map->width);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	ft_hook(void *param)
+void	loop(void *param)
 {
 	static struct s_vec3	rotation_speed = {.x = 30, .y = 30, .z = 30};
 	t_fdf					fdf;
@@ -100,7 +90,7 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT))
 		fdf->properties->rotation->y -= fdf->mlx->delta_time * rotation_speed.y;
 	draw_background(fdf->img);
-	foreach_point(fdf);
+	draw_wireframe(fdf);
 }double		delta_time;
 
 void	render_map(t_fdf fdf)
@@ -116,7 +106,7 @@ void	render_map(t_fdf fdf)
 	fdf->properties->rotation->x = 0;
 	fdf->properties->rotation->y = 0;
 	// fdf->properties->rotation->x = -57.4;
-	mlx_loop_hook(fdf->mlx, ft_hook, fdf);
+	mlx_loop_hook(fdf->mlx, loop, fdf);
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
 }
