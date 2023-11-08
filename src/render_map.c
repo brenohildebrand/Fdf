@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:12:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/08 14:26:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:07:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ void	render_map(t_fdf fdf)
 	fdf->properties->rotation->z = 0;
 	fdf->properties->rotation->x = 0;
 	fdf->properties->rotation->y = 0;
+	fdf->properties->scale->x = (1.0 / 3.0) * 1920.0 / (t_f64)(fdf->map->width - 1);
+	fdf->properties->scale->y = (1.0 / 3.0) * 1080.0 / (t_f64)(fdf->map->height - 1);
+	// fdf->properties->scale->x = 50;
+	// fdf->properties->scale->y = 50;
 	// fdf->properties->rotation->x = -57.4;
 	mlx_loop_hook(fdf->mlx, loop, fdf);
 	mlx_loop(fdf->mlx);

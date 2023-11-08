@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/08 14:09:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:46:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ static t_i32	hex_to_number(t_u8 current_character)
 		return (current_character - '0');
 	else
 	{
-		print("Oops! It looks like the map is not in the expected format. Make sure the hex color codes are valid.");
+		print((t_u8 *)"Oops! It looks like the map is not in the expected format. Make sure the hex color codes are valid.");
 		sexit(1);
 	}
+	return (0);
 }
 
 static void	next_color_update(t_fdf fdf)
@@ -94,7 +95,7 @@ static void	end_line_update(t_fdf fdf, t_coordinates2D coords)
 	}
 	else if (fdf->map->width != coords->x)
 	{
-		print("Oops! It looks like the map is not in the expected format. Make sure all the lines contain the same amount of numbers.");
+		print((t_u8 *)"Oops! It looks like the map is not in the expected format. Make sure all the lines contain the same amount of numbers.");
 		sexit(1);
 	}
 	coords->y++;

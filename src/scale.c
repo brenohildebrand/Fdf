@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:01:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/08 14:51:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:50:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void	scale(t_fdf fdf, t_point p)
 {
-	p->position.x *= (1.0 / 3.0) * 1920.0 / (t_f64)(fdf->map->width - 1);
-	p->position.y *= (1.0 / 3.0) * 1080.0 / (t_f64)(fdf->map->height - 1);
+	p->position.x *= fdf->properties->scale->x;
+	p->position.y *= fdf->properties->scale->y;
 }
