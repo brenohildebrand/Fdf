@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/07 03:41:27 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:41:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,86 @@
 #include "../kit/types/vec2.h"
 #include "fdf.h"
 
-void	parse_file(t_fdf fdf)
+static t_i32	hex_to_number(t_u8 current_character)
 {
-	t_u32			index;
-	t_coordinates2D	coordinates;
-	
-	index = 0;
-	coordinates = smalloc(sizeof(struct s_coordinates2D));
-	(*coordinates) = (struct s_coordinates2D){.x = 0, .y = 0};
-	while (fdf->file->buffer->data[index])
+	if (current_character >= 'a' && current_character <= 'f')
+		return ((current_character - 'a') + 10);
+	else if (current_character >= 'A' && current_character <= 'F')
+		return ((current_character - 'A') + 10);
+	else if (current_character >= '0' && current_character <= '9')
+		return (current_character - '0');
+	else
 	{
-		handle_space_and_newline(fdf->file, fdf->map, coordinates, &index);
-		handle_number_and_color(fdf->file, fdf->map, coordinates, &index);
-		handle_space_and_newline(fdf->file, fdf->map, coordinates, &index);
-		if (fdf->map->width != 0 && coordinates->x == fdf->map->width - 1)	
-		{
-			coordinates->x = 0;
-			coordinates->y++;
-		}
-		else
-			coordinates->x++;
+		print("Oops! It looks like the map is not in the expected format. Make sure the hex color codes are valid.");
+		sexit(1);
 	}
-	fdf->map->height = coordinates->y;
-	sfree(coordinates);
 }
 
-static void	handle_number(
+static void	next_color_update(t_fdf fdf)
+{
+	t_u8	current_character;
+	t_u8	next_character;
+	t_i32	color;
+
+	current_character = next_file();
+	next_character = next_file();
+	color = 0;
+	current_character = next_file();
+	while (current_character != ' ')
+	{
+		next_character = next_file();
+		color <<= 8;
+		color &= hex_to_number(current_character) * 16 + hex_to_number(next_character) * 1;
+		current_character = next_file();
+	}
+	color <<= 8;
+	color &= 0xFF;
+	push_rgba_vector(fdf->map->color, (struct s_rgba){
+		.r = (color >> 24 & 0xFF),
+		.g = (color >> 16 & 0xFF),
+		.b = (color >> 8 & 0xFF),
+		.a = (color >> 0 & 0xFF)
+	});
+}
+
+static void	next_number_update(
 	t_fdf fdf, 
-	t_coordinates2D coords, 
+	t_coordinates2D coords
 ){
 	t_u8	current_character;
 	t_i32	signal;
 	t_i32	number;
-	t_i32	color;
 
-	current_character = current_file(fdf->file);
+	current_character = current_file();
 	signal = 1;
 	if (current_character == '-')
 		signal = -1;
 	number = 0;
-	while (current_character < '0' && current_character > '9')
+	while (current_character >= '0' && current_character <= '9')
 	{
 		number *= 10;
 		number += current_character - '0';
-		current_character = next_file(fdf->file); 
+		current_character = next_file(); 
 	}
-	if (current_character == ',')
+	push_vec3_vector(fdf->map->position, (struct s_vec3){
+		.x = coords->x, .y = coords->y, .z = number
+	});
+	coords->x++;
+}
+
+static void	end_line_update(t_fdf fdf, t_coordinates2D coords)
+{
+	if (fdf->map->width == 0)
 	{
-		while (current_character >= 'a' && current_character <= 'f' ||
-				current_charater >= 'A' && current_character <= 'F' ||
-				current_character >= '0' && current_character <= '9')
-		{
-			current_character = next_file(fdf->file);
-		}
-	}	
+		fdf->map->width = coords->x;
+	}
+	else if (fdf->map->width != coords->x)
+	{
+		print("Oops! It looks like the map is not in the expected format. Make sure all the lines contain the same amount of numbers.");
+		sexit(1);
+	}
+	coords->y++;
+	coords->x = 0;
 }
 
 void	parse_file(t_fdf fdf)
@@ -78,25 +104,22 @@ void	parse_file(t_fdf fdf)
 
 	init_coordinates2D(&coords);
 	current_character = start_file(fdf->file);
-	while (current_character != end_file(fdf->file))
+	while (!done_file())
 	{
-		while (current_character != '\n')
+		while (current_character != '\n' && current_character != '\0')
 		{
 			if (current_character != ' ')
 			{
-				handle_number();
-				coords->x++;
+				next_number_update(fdf, coords);
+				if (current_character == ',')
+					next_color_update(fdf);
+				current_character = current_file();
 			}
-			current_character = next_file(fdf->file);		
+			else
+				current_character = next_file();		
 		}
-		if (fdf->map->width == 0)
-			fdf->map->width = coords->x;
-		else if (fdf->map->width != coords->x)
-		{
-			print("Oops! It looks like the map is not in the expected format. All the lines should contain the same amount of numbers.\n");
-			sexit(1);
-		}
-		coords->y++;
+		end_line_update(fdf, coords);
+		current_character = next_file();
 	}
 	fdf->map->height = coords->y;
 	destroy_coordinates2D(&coords);	

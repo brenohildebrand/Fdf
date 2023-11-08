@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:19:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/06 14:43:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:04:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	validate_argv(char *argv[])
 		argv[1][last_index - 3] != 'f' ||
 		argv[1][last_index - 4] != '.')
 	{
-		print((t_u8 *)"The given file does not end in .fdf.");
+		print((t_u8 *)"Oops! It looks like the map is not in the expected format. Make sure the file ends in .fdf.");
 		sexit(1);
 	}
 }
@@ -34,7 +34,7 @@ void	validate_argc(int argc)
 {
 	if (argc != 2)
 	{
-		print((t_u8 *)"Invalid number of arguments.");
+		print((t_u8 *)"Whew. Try running me again but in the following format: ./fdf <path to map>.");
 		sexit(1);
 	}
 }

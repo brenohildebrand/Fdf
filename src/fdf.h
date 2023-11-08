@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.sp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/11/06 17:17:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/08 09:58:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ void	centralize(t_fdf fdf, t_point p);
 void	rotate(t_fdf fdf, t_point p);
 void	draw_background(mlx_image_t *img);
 void	put_valid_pixel(mlx_image_t *img, t_f64 x, t_f64 y, t_u32 color);
+void	init_coordinates2D(t_coordinates2D *coords);
+void	destroy_coordinates2D(t_coordinates2D *coords);
 
 #endif
