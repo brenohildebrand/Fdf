@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:12:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2023/11/08 16:07:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/11 10:59:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ static void	draw_wireframe(t_fdf fdf)
 	while (y < fdf->map->height)
 	{
 		x = 0;
-		while(x < fdf->map->width)
+		while (x < fdf->map->width)
 		{
 			if (x + 1 < fdf->map->width)
 				transform_and_draw(
-					fdf, 
-					x + y * fdf->map->width, 
+					fdf,
+					x + y * fdf->map->width,
 					x + 1 + y * fdf->map->width);
 			if (y + 1 < fdf->map->height)
 				transform_and_draw(
-					fdf, 
-					x + y * fdf->map->width, 
+					fdf,
+					x + y * fdf->map->width,
 					x + (y + 1) * fdf->map->width);
 			x++;
 		}
@@ -91,7 +91,7 @@ void	loop(void *param)
 		fdf->properties->rotation->y -= fdf->mlx->delta_time * rotation_speed.y;
 	draw_background(fdf->img);
 	draw_wireframe(fdf);
-}double		delta_time;
+}
 
 void	render_map(t_fdf fdf)
 {

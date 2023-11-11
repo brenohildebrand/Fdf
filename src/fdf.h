@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 03:34:53 by brenohildeb       #+#    #+#             */
-/*   Updated: 2023/11/08 15:49:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2023/11/11 10:56:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_map			*t_map;
 typedef struct s_properties		*t_properties;
 typedef struct s_extra			*t_extra;
 typedef struct s_point			*t_point;
-typedef struct s_coordinates2D	*t_coordinates2D;
+typedef struct s_coordinates2d	*t_coordinates2d;
 
 struct s_fdf {
 	mlx_t			*mlx;
@@ -60,7 +60,7 @@ struct s_point {
 	struct s_vec3	position;
 };
 
-struct s_coordinates2D {
+struct s_coordinates2d {
 	t_i32	x;
 	t_i32	y;
 };
@@ -82,12 +82,12 @@ void	init_properties(t_properties *properties);
 void	handle_space_and_newline(
 	t_file file, 
 	t_map map, 
-	t_coordinates2D coordinates, 
+	t_coordinates2d coordinates, 
 	t_u32 *index);
 void	handle_number_and_color(
 	t_file file,
 	t_map map,
-	t_coordinates2D coordinates,
+	t_coordinates2d coordinates,
 	t_u32 *index);
 void	normalize_z(t_fdf fdf, t_point p);
 void	scale(t_fdf fdf, t_point p);
@@ -98,7 +98,7 @@ void	centralize(t_fdf fdf, t_point p);
 void	rotate(t_fdf fdf, t_point p);
 void	draw_background(mlx_image_t *img);
 void	put_valid_pixel(mlx_image_t *img, t_f64 x, t_f64 y, t_u32 color);
-void	init_coordinates2D(t_coordinates2D *coords);
-void	destroy_coordinates2D(t_coordinates2D *coords);
+void	init_coordinates2d(t_coordinates2d *coords);
+void	destroy_coordinates2d(t_coordinates2d *coords);
 
 #endif

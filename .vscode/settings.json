@@ -8,6 +8,7 @@
 		"actions.h": "c",
 		"math.h": "c",
 		"vec3.h": "c",
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"vec2_vector.h": "c"
 	}
 }
