@@ -3,24 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/12 17:47:04 by bhildebr          #+#    #+#              #
-#    Updated: 2023/11/08 16:35:25 by bhildebr         ###   ########.fr        #
+#    Created: 2023/11/21 05:26:41 by marvin            #+#    #+#              #
+#    Updated: 2023/11/21 05:26:41 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-$(NAME): all
+SOURCES = \
+	main.c \
+	shared.c \
 
-all:
-	cc -Wall -Wextra -Werror src/*.c kit/actions/*.c vendor/MLX42/build/libmlx42.a -o $(NAME) -ldl -lpthread -lglfw -lm -g -Ivendor/MLX42/include
+all: $(NAME)
 
-valgrind:	all
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=./supression.sup ./fdf
+$(NAME): $(OBJECTS)
+	cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11
 
-valgrind_bonus:	bonus
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=./supression.sup ./fdf_bonus
+clean:
 
-.PHONY: $(NAME) all
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
