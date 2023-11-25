@@ -20,14 +20,20 @@ SOURCES = \
 	shared.c \
 	print.c \
 	args.c \
-	file.c
+	file.c \
+	map.c \
+	utils.c \
+	point.c
 
 OBJECTS = \
 	main.o \
 	shared.o \
 	print.o \
 	args.o \
-	file.o
+	file.o \
+	map.o \
+	utils.o \
+	point.o
 
 all: norm $(NAME)
 
@@ -53,3 +59,8 @@ re: fclean all
 main.o: main.c
 shared.o: shared.c
 print.o: print.c
+args.o: args.c
+file.o: file.c
+map.o: map.c
+utils.o: utils.c
+point.o: point.c

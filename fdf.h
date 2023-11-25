@@ -21,6 +21,8 @@
 typedef struct s_shared			*t_shared;
 typedef struct s_file			*t_file;
 typedef struct s_map			*t_map;
+typedef struct s_point			*t_point;
+typedef struct s_position		*t_position;
 typedef struct s_framebuffer	*t_framebuffer;
 typedef struct s_window			*t_window;
 
@@ -34,11 +36,29 @@ struct s_shared {
 };
 
 struct s_file {
-	void			*address;
+	unsigned char	*address;
 	unsigned int	size;
 };
 
-struct s_map {};
+struct s_map {
+	t_point			*address;
+	unsigned int	size;
+	unsigned int	width;
+	unsigned int	height;
+	unsigned int	length;
+	char			*cursor;
+};
+
+struct s_point {
+	t_position	position;
+	int			color;
+};
+
+struct s_position {
+	double	x;
+	double	y;
+	double	z;
+};
 
 struct s_framebuffer{};
 
@@ -47,9 +67,15 @@ struct s_window {
 	void	*window;
 };
 
-t_shared	get_shared(void);
-void		print(char *message);
-void		validate_args(void);
-void		read_file();
+t_shared		get_shared(void);
+void			print(char *message);
+void			validate_args(void);
+void			read_file(void);
+void			create_map_from_file(void);
+t_point			create_point_from_map(void);
+void			*custom_malloc(unsigned int size);
+void			raise_error(unsigned char exit_code);
+int				hex_to_number(unsigned char digit);
+unsigned int	get_true_map_width(void);
 
 #endif

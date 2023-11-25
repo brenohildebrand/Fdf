@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	shared->argv = argv;
 	validate_args();
 	read_file();
+	create_map_from_file();
 	return (0);
 }
 

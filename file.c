@@ -16,12 +16,7 @@ static t_file	create_file(void)
 {
 	t_file	file;
 
-	file = malloc(sizeof(struct s_file));
-	if (file == (void *)0)
-	{
-		print("An error ocurred.");
-		exit(255);
-	}
+	file = custom_malloc(sizeof(struct s_file));
 	file->address = 0;
 	file->size = 0;
 	return (file);
@@ -29,24 +24,23 @@ static t_file	create_file(void)
 
 static void	resize_file(t_file file)
 {
-	void			*new_address;
+	unsigned char	*new_address;
 	unsigned int	size;
 
 	if (file->size == 0)
 	{
-		file->size = 4096;
-		file->address = malloc(file->size * sizeof(unsigned char));
+		file->size = 4096 * sizeof(unsigned char);
+		file->address = custom_malloc(file->size);
 	}
 	else
 	{
-		new_address = malloc(file->size * 2 * sizeof(unsigned char));
+		new_address = custom_malloc(file->size * 2 * sizeof(unsigned char));
 		size = file->size;
 		while (size--)
-			((unsigned char *)(new_address))[size] = \
-				((unsigned char *)(file->address))[size];
+			new_address[size] = file->address[size];
 		size = file->size * 2;
 		while (--size >= file->size)
-			((unsigned char *)(new_address))[size] = 0;
+			new_address[size] = 0;
 		free(file->address);
 		file->size = file->size * 2;
 		file->address = new_address;
@@ -56,28 +50,22 @@ static void	resize_file(t_file file)
 static void	init_file(t_file file, char *path)
 {
 	int				fd;
-	unsigned int	nread;
-	unsigned int	previous_file_size;
+	ssize_t			nread;
+	unsigned int	size;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		print("An error ocurred.");
-		exit(254);
-	}
-	previous_file_size = file->size;
+		raise_error(254);
+	size = file->size;
 	while (1)
 	{
 		resize_file(file);
-		nread = read(fd, file->address, file->size - previous_file_size);
+		nread = read(fd, file->address + size, file->size - size);
 		if (nread == 0)
 			break ;
 		if (nread == -1)
-		{
-			print("An error ocurred.");
-			exit(253);
-		}
-		previous_file_size = file->size;
+			raise_error(253);
+		size = file->size;
 	}
 	close(fd);
 }
@@ -85,9 +73,8 @@ static void	init_file(t_file file, char *path)
 void	read_file(void)
 {
 	t_shared	shared;
-	t_file		file;
 
 	shared = get_shared();
-	file = create_file();
-	init_file(file, shared->argv[1]);
+	shared->file = create_file();
+	init_file(shared->file, shared->argv[1]);
 }
