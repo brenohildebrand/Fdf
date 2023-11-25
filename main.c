@@ -12,17 +12,13 @@
 
 #include "fdf.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	// if (argc != 2)
-	// {
-	// 	print("Usage: ./fdf <path-to-map>\n");
-	// 	exit(0);
-	// }
+	t_shared	shared;
 
-	// test if the path ends in .fdf
-	// test if you can open it
-	print("Hello World!");
-
+	shared = get_shared();
+	shared->argc = argc;
+	shared->argv = argv;
+	validate_args();
 	return (0);
 }

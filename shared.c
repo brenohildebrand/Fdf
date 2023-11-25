@@ -14,7 +14,12 @@
 
 t_shared	get_shared(void)
 {
-	static t_shared	shared = NULL;
+	static struct s_shared	shared = {
+		.argc = 0,
+		.argv = 0,
+		.mlx = 0,
+		.window = 0,
+	};
 
-	return (shared);
+	return (&shared);
 }

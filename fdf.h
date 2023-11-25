@@ -16,15 +16,19 @@
 # include "minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
+#include <fcntl.h>
 
 typedef struct s_shared	*t_shared;
 
 struct s_shared {
+	int		argc;
+	char	**argv;
 	void	*mlx;
 	void	*window;
 };
 
 t_shared	get_shared(void);
 void		print(char *message);
+void		validate_args(void);
 
 #endif
