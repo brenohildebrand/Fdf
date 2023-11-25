@@ -19,13 +19,15 @@ SOURCES = \
 	main.c \
 	shared.c \
 	print.c \
-	args.c
+	args.c \
+	file.c
 
 OBJECTS = \
 	main.o \
 	shared.o \
 	print.o \
-	args.o
+	args.o \
+	file.o
 
 all: norm $(NAME)
 

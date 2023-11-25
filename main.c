@@ -20,5 +20,11 @@ int	main(int argc, char **argv)
 	shared->argc = argc;
 	shared->argv = argv;
 	validate_args();
+	read_file();
 	return (0);
 }
+
+// create_map_from_file();
+// create_framebuffer_from_map();
+// create_window_from_framebuffer();
+// free_shared();

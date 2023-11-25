@@ -18,11 +18,31 @@
 # include <unistd.h>
 #include <fcntl.h>
 
-typedef struct s_shared	*t_shared;
+typedef struct s_shared			*t_shared;
+typedef struct s_file			*t_file;
+typedef struct s_map			*t_map;
+typedef struct s_framebuffer	*t_framebuffer;
+typedef struct s_window			*t_window;
 
 struct s_shared {
-	int		argc;
-	char	**argv;
+	int				argc;
+	char			**argv;
+	t_file			file;
+	t_map			map;
+	t_framebuffer	framebuffer;
+	t_window		window;
+};
+
+struct s_file {
+	void			*address;
+	unsigned int	size;
+};
+
+struct s_map {};
+
+struct s_framebuffer{};
+
+struct s_window {
 	void	*mlx;
 	void	*window;
 };
@@ -30,5 +50,6 @@ struct s_shared {
 t_shared	get_shared(void);
 void		print(char *message);
 void		validate_args(void);
+void		read_file();
 
 #endif
