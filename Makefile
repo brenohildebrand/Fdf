@@ -23,7 +23,9 @@ SOURCES = \
 	file.c \
 	map.c \
 	utils.c \
-	point.c
+	point.c \
+	framebuffer.c \
+	window.c
 
 OBJECTS = \
 	main.o \
@@ -33,7 +35,9 @@ OBJECTS = \
 	file.o \
 	map.o \
 	utils.o \
-	point.o
+	point.o \
+	framebuffer.o \
+	window.o
 
 all: norm $(NAME)
 

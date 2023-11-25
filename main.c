@@ -22,10 +22,9 @@ int	main(int argc, char **argv)
 	validate_args();
 	read_file();
 	create_map_from_file();
+	create_framebuffer_from_map();
+	create_window_from_framebuffer();
 	return (0);
 }
 
-// create_map_from_file();
-// create_framebuffer_from_map();
-// create_window_from_framebuffer();
 // free_shared();

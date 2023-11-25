@@ -60,7 +60,12 @@ struct s_position {
 	double	z;
 };
 
-struct s_framebuffer{};
+struct s_framebuffer{
+	int				*pixels;
+	unsigned int	size;
+	unsigned int	width;
+	unsigned int	height;
+};
 
 struct s_window {
 	void	*mlx;
@@ -77,5 +82,7 @@ void			*custom_malloc(unsigned int size);
 void			raise_error(unsigned char exit_code);
 int				hex_to_number(unsigned char digit);
 unsigned int	get_true_map_width(void);
+void			create_framebuffer_from_map(void);
+void			create_window_from_framebuffer(void);
 
 #endif
