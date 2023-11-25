@@ -17,7 +17,8 @@ void	print(char *message)
 	unsigned int	size;
 
 	size = 0;
-	while (message[i] != '\0')
+	while (message[size] != '\0')
 		size++;
 	write(1, message, size);
+	write(1, "\n", 1);
 }

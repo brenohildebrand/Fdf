@@ -12,16 +12,17 @@
 
 #include "fdf.h"
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
-	if (argc != 2)
-	{
-		print("Usage: ./fdf <path-to-map>\n");
-		exit(0);
-	}
+	// if (argc != 2)
+	// {
+	// 	print("Usage: ./fdf <path-to-map>\n");
+	// 	exit(0);
+	// }
 
 	// test if the path ends in .fdf
 	// test if you can open it
+	print("Hello World!");
 
 	return (0);
 }

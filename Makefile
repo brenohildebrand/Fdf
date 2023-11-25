@@ -12,20 +12,40 @@
 
 NAME = fdf
 
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
 SOURCES = \
 	main.c \
 	shared.c \
+	print.c
+
+OBJECTS = \
+	main.o \
+	shared.o \
+	print.o
 
 all: $(NAME)
 
+run: $(NAME)
+	@./$(NAME)
+
 $(NAME): $(OBJECTS)
-	cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11
+	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11
 
 clean:
+	@$(RM) $(OBJECTS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+main.o: main.c
+shared.o: shared.c
+print.o: print.c

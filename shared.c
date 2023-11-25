@@ -16,5 +16,5 @@ t_shared	get_shared(void)
 {
 	static t_shared	shared = NULL;
 
-	return (t_shared);
+	return (shared);
 }
