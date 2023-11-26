@@ -55,5 +55,10 @@ unsigned int	get_true_map_width(void)
 
 void	put_pixel(int x, int y, int color)
 {
-	return ;
+	t_shared	shared;
+	t_window	window;
+
+	shared = get_shared();
+	window = shared->window;
+	mlx_pixel_put(window->mlx, window->window, x, y, color);
 }

@@ -19,35 +19,66 @@ static t_framebuffer	create_framebuffer(void)
 	framebuffer = custom_malloc(sizeof(struct s_framebuffer));
 	framebuffer->width = WIDTH;
 	framebuffer->height = HEIGHT;
+	framebuffer->length = framebuffer->width * framebuffer->height;
 	framebuffer->size = framebuffer->width * framebuffer->height * sizeof(int);
 	framebuffer->pixels = custom_malloc(framebuffer->size);
 	return (framebuffer);
 }
 
-static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
-{
-	t_point			point;
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	k;
+static void	put_line_on_framebuffer(
+	t_framebuffer framebuffer,
+	t_point p1,
+	t_point p2
+){
+	double	dx;
+	double	dy;
+	dobule	x_increment;
+	double	y_increment;
+	int		num_steps;
 
-	framebuffer->length = 0;
-	while (framebuffer->length < map->length)
+	dx = p2->position->x - p1->position->x;
+	dy = p2->position->y - p1->position->y;
+	num_steps = (int)round(fmax(fabs(dx), fabs(dy)));
+	x_increment = dx / num_steps;
+	y_increment = dy / num_steps;
+	while (num_steps--)
 	{
-		point = map->address[length];
-		i = point->position->x;
-		j = point->position->y;
-		k = point->position->z;
-		k += 1;
-		framebuffer->pixels[i + (j * map->width)] = point->color;
-		(framebuffer->length)++;
+		framebuffer->pixels[\
+			p1->position->x + (p1->position->y * framebuffer->width) \
+		] = p1->color;
+		p1->position->x += x_increment;
+		p1->position->y += y_increment;
 	}
 }
-// scale
-// rotate
-// do whatever on i, j and k
-// i += (1.0 / 3.0) * framebuffer->width / map->width;
-// j += (1.0 / 3.0) * framebuffer->height / map->height;
+
+static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
+{
+	unsigned int	length;
+	unsigned int	i;
+	unsigned int	j;
+
+	length = 0;
+	while (length < map->length)
+	{
+		i = length % map->width;
+		j = length / map->width;
+		if (i < map->width - 1)
+		{
+			put_line_on_framebuffer(
+				framebuffer,
+				transform_from(map->address[length]),
+				transform_from(map->address[length + 1]));
+		}
+		if (j < map->height - 1)
+		{
+			put_line_on_framebuffer(
+				framebuffer,
+				transform_from(map->address[length]),
+				transform_from(map->address[length + map->width]));
+		}
+		length++;
+	}
+}
 
 void	create_framebuffer_from_map(void)
 {

@@ -48,7 +48,7 @@ norm:
 	@norminette $(SOURCES) $(HEADERS)
 
 $(NAME): $(OBJECTS)
-	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11
+	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11 -lm
 
 clean:
 	@$(RM) $(OBJECTS)

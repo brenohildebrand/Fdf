@@ -47,6 +47,8 @@ static int	get_color(t_map map)
 	{
 		(map->cursor) += 3;
 		color = 0;
+		color <<= 8;
+		color |= 0x00;
 		while ((*(map->cursor) >= '0' && *(map->cursor) <= '9') || \
 				(*(map->cursor) >= 'a' && *(map->cursor) <= 'f') || \
 				(*(map->cursor) >= 'A' && *(map->cursor) <= 'F'))
@@ -56,11 +58,9 @@ static int	get_color(t_map map)
 					hex_to_number(*(map->cursor + 1)) * 1;
 			(map->cursor) += 2;
 		}
-		color <<= 8;
-		color |= 0xFF;
 	}
 	else
-		color = (0x00 << 24) | (0x00 << 16) | (0x00 << 8) | (0xFF << 0);
+		color = (0x00 << 24) | (0x00 << 16) | (0x00 << 8) | (0x00 << 0);
 	return (color);
 }
 
