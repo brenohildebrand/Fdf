@@ -17,29 +17,30 @@ static t_framebuffer	create_framebuffer(void)
 	t_framebuffer	framebuffer;
 
 	framebuffer = custom_malloc(sizeof(struct s_framebuffer));
-	framebuffer->width = 1920;
-	framebuffer->height = 1080;
+	framebuffer->width = WIDTH;
+	framebuffer->height = HEIGHT;
 	framebuffer->size = framebuffer->width * framebuffer->height * sizeof(int);
 	framebuffer->pixels = custom_malloc(framebuffer->size);
+	return (framebuffer);
 }
 
 static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 {
 	t_point			point;
-	unsigned int	length;
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	k;
 
-	length = 0;
-	while (length < map->length)
+	framebuffer->length = 0;
+	while (framebuffer->length < map->length)
 	{
 		point = map->address[length];
 		i = point->position->x;
 		j = point->position->y;
 		k = point->position->z;
+		k += 1;
 		framebuffer->pixels[i + (j * map->width)] = point->color;
-		length++;
+		(framebuffer->length)++;
 	}
 }
 // scale

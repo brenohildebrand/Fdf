@@ -16,7 +16,10 @@
 # include "minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
-#include <fcntl.h>
+# include <fcntl.h>
+
+# define WIDTH 1280
+# define HEIGHT 720
 
 typedef struct s_shared			*t_shared;
 typedef struct s_file			*t_file;
@@ -65,11 +68,13 @@ struct s_framebuffer{
 	unsigned int	size;
 	unsigned int	width;
 	unsigned int	height;
+	unsigned int	length;
 };
 
 struct s_window {
 	void	*mlx;
 	void	*window;
+	void	*image;
 };
 
 t_shared		get_shared(void);
@@ -84,5 +89,6 @@ int				hex_to_number(unsigned char digit);
 unsigned int	get_true_map_width(void);
 void			create_framebuffer_from_map(void);
 void			create_window_from_framebuffer(void);
+void			put_pixel(int x, int y, int color);
 
 #endif

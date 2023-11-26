@@ -52,3 +52,8 @@ unsigned int	get_true_map_width(void)
 		true_width = map->width;
 	return (true_width);
 }
+
+void	put_pixel(int x, int y, int color)
+{
+	return ;
+}

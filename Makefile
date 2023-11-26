@@ -39,10 +39,13 @@ OBJECTS = \
 	framebuffer.o \
 	window.o
 
+HEADERS = \
+	fdf.h
+
 all: norm $(NAME)
 
 norm:
-	@norminette $(SOURCES)
+	@norminette $(SOURCES) $(HEADERS)
 
 $(NAME): $(OBJECTS)
 	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11
