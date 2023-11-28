@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static t_window	create_window(void)
 {
@@ -24,6 +25,19 @@ static t_window	create_window(void)
 	if (window->window == (void *)0)
 		raise_error(249);
 	return (window);
+}
+
+static int	esc_hook(int keycode, void *ptr)
+{
+	t_shared	shared;
+
+	printf("keycode: %d\n", keycode);
+	if (keycode == 65307)
+	{
+		shared = get_shared();
+		mlx_destroy_window(shared->window->mlx, shared->window->window);
+		mlx_destroy_display(shared->window->mlx);
+	}
 }
 
 static void	init_window(t_window window, t_framebuffer framebuffer)
@@ -42,6 +56,7 @@ static void	init_window(t_window window, t_framebuffer framebuffer)
 		put_pixel(i, j, color);
 		length++;
 	}
+	mlx_key_hook(window->window, esc_hook, NULL);
 	mlx_loop(window->mlx);
 }
 

@@ -51,9 +51,9 @@ void	isometrify(t_point point)
 		shared->framebuffer->width / (3 * (shared->map->width - 1));
 	y -= shared->map->height / 2 * \
 		shared->framebuffer->height / (3 * (shared->map->height - 1));
-	another_x = x * cos(45 * M_PI / 180.0) - y * sin(45 * M_PI / 180.0);
-	another_y = (x * sin(45 * M_PI / 180.0) + \
-				y * cos(45 * M_PI / 180.0)) * cos(54.7 * M_PI / 180.0) - \
+	another_x = x * cos(-45 * M_PI / 180.0) - y * sin(-45 * M_PI / 180.0);
+	another_y = (x * sin(-45 * M_PI / 180.0) + \
+				y * cos(-45 * M_PI / 180.0)) * cos(54.7 * M_PI / 180.0) - \
 				point->position->z * sin(54.7 * M_PI / 180.0);
 	x = another_x;
 	y = another_y;
