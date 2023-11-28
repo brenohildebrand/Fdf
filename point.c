@@ -28,15 +28,23 @@ static t_point	create_point(void)
 static double	get_z(t_map map)
 {
 	int	z;
+	int	signal;
 
 	z = 0;
+	if (*(map->cursor) == '-')
+	{
+		signal = -1;
+		(map->cursor)++;
+	}
+	else
+		signal = 1;
 	while (*(map->cursor) >= '0' && *(map->cursor) <= '9')
 	{
 		z *= 10;
 		z += *(map->cursor) - '0';
 		(map->cursor)++;
 	}
-	return ((double)z);
+	return ((double)(z * signal));
 }
 
 static int	get_color(t_map map)

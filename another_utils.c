@@ -20,3 +20,47 @@ void	newline_update(void)
 	shared->map->height++;
 	shared->map->width = 0;
 }
+
+double	get_max_z(void)
+{
+	static double	max_z = 0.0;
+	static int		is_calculated = 0;
+	unsigned int	i;
+	t_shared		shared;
+
+	if (!is_calculated)
+	{
+		shared = get_shared();
+		i = 0;
+		max_z = shared->map->address[0]->position->z;
+		while (i < shared->map->length)
+		{
+			max_z = fmax(max_z, shared->map->address[i]->position->z);
+			i++;
+		}
+		is_calculated = 1;
+	}
+	return (max_z);
+}
+
+double	get_min_z(void)
+{
+	static double	min_z = 0.0;
+	static int		is_calculated = 0;
+	unsigned int	i;
+	t_shared		shared;
+
+	if (!is_calculated)
+	{
+		shared = get_shared();
+		i = 0;
+		min_z = shared->map->address[0]->position->z;
+		while (i < shared->map->length)
+		{
+			min_z = fmin(min_z, shared->map->address[i]->position->z);
+			i++;
+		}
+		is_calculated = 1;
+	}
+	return (min_z);
+}

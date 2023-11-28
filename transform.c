@@ -14,14 +14,11 @@
 
 static void	transform(t_point point)
 {
+	normalize_z(point);
 	scale(point);
 	isometrify(point);
 	centralize(point);
 }
-// normalize z
-// scale
-// rotate
-// centralize
 
 t_point	transform_one_from(t_point point)
 {

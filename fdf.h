@@ -97,5 +97,8 @@ void			newline_update(void);
 void			isometrify(t_point point);
 void			scale(t_point point);
 void			centralize(t_point point);
+void			normalize_z(t_point point);
+double			get_max_z(void);
+double			get_min_z(void);
 
 #endif
