@@ -60,14 +60,14 @@ static int	get_color(t_map map)
 		}
 	}
 	else
-		color = (0x00 << 24) | (0x00 << 16) | (0x00 << 8) | (0x00 << 0);
+		color = (0x00 << 24) | (0xFF << 16) | (0xFF << 8) | (0xFF << 0);
 	return (color);
 }
 
 static void	init_point(t_point point, t_map map)
 {
 	point->position->x = (double)map->width;
-	point->position->y = (double)map->height;
+	point->position->y = (double)map->height - 1;
 	point->position->z = get_z(map);
 	point->color = get_color(map);
 }

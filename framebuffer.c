@@ -32,7 +32,7 @@ static void	put_line_on_framebuffer(
 ){
 	double	dx;
 	double	dy;
-	dobule	x_increment;
+	double	x_increment;
 	double	y_increment;
 	int		num_steps;
 
@@ -43,13 +43,31 @@ static void	put_line_on_framebuffer(
 	y_increment = dy / num_steps;
 	while (num_steps--)
 	{
-		framebuffer->pixels[\
-			p1->position->x + (p1->position->y * framebuffer->width) \
-		] = p1->color;
+		if ((int)p1->position->x + ((int)p1->position->y * framebuffer->width) \
+			< framebuffer->length)
+		{
+			framebuffer->pixels[\
+				(int)p1->position->x + \
+				((int)p1->position->y * framebuffer->width) \
+			] = p1->color;
+		}
 		p1->position->x += x_increment;
 		p1->position->y += y_increment;
 	}
 }
+
+// static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
+// {
+// 	unsigned int	length;
+
+// 	length = 0;
+// 	while (length < framebuffer->length)
+// 	{
+// 		framebuffer->pixels[length] = 0xFFFF0000;
+// 		length++;
+// 	}
+// put_line_on_framebuffer(framebuffer, map->address[0],
+// }
 
 static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 {
@@ -66,15 +84,15 @@ static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 		{
 			put_line_on_framebuffer(
 				framebuffer,
-				transform_from(map->address[length]),
-				transform_from(map->address[length + 1]));
+				transform_one_from(map->address[length]),
+				transform_two_from(map->address[length + 1]));
 		}
 		if (j < map->height - 1)
 		{
 			put_line_on_framebuffer(
 				framebuffer,
-				transform_from(map->address[length]),
-				transform_from(map->address[length + map->width]));
+				transform_one_from(map->address[length]),
+				transform_two_from(map->address[length + map->width]));
 		}
 		length++;
 	}

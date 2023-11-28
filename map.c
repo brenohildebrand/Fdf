@@ -66,6 +66,7 @@ static void	init_map(t_map map, t_file file)
 	t_point			point;
 
 	map->cursor = (char *)file->address;
+	map->height = 1;
 	while (1)
 	{
 		while (*(map->cursor) == ' ')
@@ -74,9 +75,9 @@ static void	init_map(t_map map, t_file file)
 		{
 			if (map->width != get_true_map_width())
 				raise_error(251);
-			map->height++;
-			map->width = 0;
 			(map->cursor)++;
+			if (*(map->cursor) != '\0')
+				newline_update();
 			while (*(map->cursor) == ' ')
 				(map->cursor)++;
 		}
@@ -86,7 +87,6 @@ static void	init_map(t_map map, t_file file)
 		push_point_to_map(point, map);
 		map->width++;
 	}
-	map->width = get_true_map_width();
 }
 
 void	create_map_from_file(void)

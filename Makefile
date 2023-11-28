@@ -13,7 +13,7 @@
 NAME = fdf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 
 SOURCES = \
 	main.c \
@@ -25,7 +25,10 @@ SOURCES = \
 	utils.c \
 	point.c \
 	framebuffer.c \
-	window.c
+	window.c \
+	transform.c \
+	another_utils.c \
+	transformations.c
 
 OBJECTS = \
 	main.o \
@@ -37,7 +40,10 @@ OBJECTS = \
 	utils.o \
 	point.o \
 	framebuffer.o \
-	window.o
+	window.o \
+	transform.o \
+	another_utils.o \
+	transformations.o
 
 HEADERS = \
 	fdf.h

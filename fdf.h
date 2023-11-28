@@ -91,5 +91,11 @@ unsigned int	get_true_map_width(void);
 void			create_framebuffer_from_map(void);
 void			create_window_from_framebuffer(void);
 void			put_pixel(int x, int y, int color);
+t_point			transform_one_from(t_point point);
+t_point			transform_two_from(t_point point);
+void			newline_update(void);
+void			isometrify(t_point point);
+void			scale(t_point point);
+void			centralize(t_point point);
 
 #endif
