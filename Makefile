@@ -52,6 +52,9 @@ HEADERS = \
 
 all: norm $(NAME)
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 norm:
 	@norminette $(SOURCES) $(HEADERS)
 
@@ -67,15 +70,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all $(NAME) clean fclean re norm
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-main.o: main.c
-shared.o: shared.c
-print.o: print.c
-args.o: args.c
-file.o: file.c
-map.o: map.c
-utils.o: utils.c
-point.o: point.c
