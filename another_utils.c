@@ -64,3 +64,27 @@ double	get_min_z(void)
 	}
 	return (min_z);
 }
+
+double	get_scale_x(void)
+{
+	static double	scale_x = 0;
+	t_shared		shared;
+
+	shared = get_shared();
+	if (scale_x == 0)
+		scale_x = \
+			(double)shared->framebuffer->width / \
+			(double)(3 * (shared->map->width - 1));
+	return (scale_x);
+}
+
+double	get_scale_y(void)
+{
+	return (get_scale_x());
+}
+// static double	scale_y = 0;
+// t_shared		shared;
+
+// shared = get_shared();
+// if (scale_y == 0)
+// return (scale_y);

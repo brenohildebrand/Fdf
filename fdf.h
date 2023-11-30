@@ -100,5 +100,7 @@ void			centralize(t_point point);
 void			normalize_z(t_point point);
 double			get_max_z(void);
 double			get_min_z(void);
+double			get_scale_x(void);
+double			get_scale_y(void);
 
 #endif

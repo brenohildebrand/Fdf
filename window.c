@@ -31,7 +31,6 @@ static int	esc_hook(int keycode, void *ptr)
 {
 	t_shared	shared;
 
-	printf("keycode: %d\n", keycode);
 	if (keycode == 65307)
 	{
 		shared = get_shared();

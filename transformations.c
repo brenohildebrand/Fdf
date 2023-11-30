@@ -21,8 +21,12 @@ void	normalize_z(t_point point)
 	shared = get_shared();
 	max_z = get_max_z();
 	min_z = get_min_z();
-	point->position->z = (double)shared->framebuffer->height / 3.0 * \
-		(double)(point->position->z - min_z) * (1.0 / (double)(max_z - min_z));
+	if (max_z != min_z)
+	{
+		point->position->z = (double)shared->framebuffer->height / 3.0 * \
+			(double)(point->position->z - min_z) * \
+			(1.0 / (double)(max_z - min_z));
+	}
 }
 
 void	scale(t_point point)
@@ -31,9 +35,9 @@ void	scale(t_point point)
 
 	shared = get_shared();
 	point->position->x *= \
-		shared->framebuffer->width / (3 * (shared->map->width - 1));
+		get_scale_x();
 	point->position->y *= \
-		shared->framebuffer->height / (3 * (shared->map->height - 1));
+		get_scale_y();
 }
 
 void	isometrify(t_point point)
@@ -48,19 +52,19 @@ void	isometrify(t_point point)
 	x = point->position->x;
 	y = point->position->y;
 	x -= shared->map->width / 2 * \
-		shared->framebuffer->width / (3 * (shared->map->width - 1));
+		get_scale_x();
 	y -= shared->map->height / 2 * \
-		shared->framebuffer->height / (3 * (shared->map->height - 1));
-	another_x = x * cos(-45 * M_PI / 180.0) - y * sin(-45 * M_PI / 180.0);
-	another_y = (x * sin(-45 * M_PI / 180.0) + \
-				y * cos(-45 * M_PI / 180.0)) * cos(54.7 * M_PI / 180.0) - \
+		get_scale_y();
+	another_x = x * cos(-45.0 * M_PI / 180.0) - y * sin(-45.0 * M_PI / 180.0);
+	another_y = (x * sin(-45.0 * M_PI / 180.0) + \
+				y * cos(-45.0 * M_PI / 180.0)) * cos(54.7 * M_PI / 180.0) - \
 				point->position->z * sin(54.7 * M_PI / 180.0);
 	x = another_x;
 	y = another_y;
 	x += shared->map->width / 2 * \
-		shared->framebuffer->width / (3 * (shared->map->width - 1));
+		get_scale_x();
 	y += shared->map->height / 2 * \
-		shared->framebuffer->height / (3 * (shared->map->height - 1));
+		get_scale_y();
 	point->position->x = x;
 	point->position->y = y;
 }
@@ -72,10 +76,10 @@ void	centralize(t_point point)
 	shared = get_shared();
 	point->position->x += \
 		(shared->framebuffer->width - (shared->map->width * \
-		(shared->framebuffer->width / (3 * (shared->map->width - 1))) \
+		(get_scale_x()) \
 		)) / 2;
 	point->position->y += \
 		(shared->framebuffer->height - (shared->map->height * \
-		(shared->framebuffer->height / (3 * (shared->map->height - 1))) \
+		(get_scale_y()) \
 		)) / 2;
 }
