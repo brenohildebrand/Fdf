@@ -33,9 +33,9 @@ int	hex_to_number(unsigned char digit)
 	if (digit >= '0' && digit <= '9')
 		return (digit - '0');
 	if (digit >= 'a' && digit <= 'f')
-		return (digit - 'a');
+		return (digit - 'a' + 10);
 	if (digit >= 'A' && digit <= 'F')
-		return (digit - 'A');
+		return (digit - 'A' + 10);
 	raise_error(252);
 	return (0);
 }

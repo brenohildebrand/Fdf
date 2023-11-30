@@ -13,42 +13,22 @@
 #include "fdf.h"
 #include <stdio.h>
 
-static void	transform(t_point point)
+void	transform(void)
 {
-	normalize_z(point);
-	scale(point);
-	isometrify(point);
-	centralize(point);
-}
+	t_shared		shared;
+	unsigned int	i;
 
-t_point	transform_one_from(t_point point)
-{
-	static struct s_position	current_s_position;
-	static struct s_point		current_s_point = (struct s_point){
-		.position = &current_s_position
-	};
-	static t_point				current_point = &current_s_point;
-
-	current_point->position->x = point->position->x;
-	current_point->position->y = point->position->y;
-	current_point->position->z = point->position->z;
-	current_point->color = point->color;
-	transform(current_point);
-	return (current_point);
-}
-
-t_point	transform_two_from(t_point point)
-{
-	static struct s_position	current_s_position;
-	static struct s_point		current_s_point = (struct s_point){
-		.position = &current_s_position
-	};
-	static t_point				current_point = &current_s_point;
-
-	current_point->position->x = point->position->x;
-	current_point->position->y = point->position->y;
-	current_point->position->z = point->position->z;
-	current_point->color = point->color;
-	transform(current_point);
-	return (current_point);
+	shared = get_shared();
+	i = 0;
+	while (i < shared->map->length)
+		normalize_z(shared->map->address[i++]);
+	i = 0;
+	while (i < shared->map->length)
+		scale(shared->map->address[i++]);
+	i = 0;
+	while (i < shared->map->length)
+		isometrify(shared->map->address[i++]);
+	i = 0;
+	while (i < shared->map->length)
+		centralize(shared->map->address[i++]);
 }

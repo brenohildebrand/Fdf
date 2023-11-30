@@ -31,44 +31,32 @@ static void	put_line_on_framebuffer(
 	t_point p1,
 	t_point p2
 ){
-	double	dx;
-	double	dy;
-	double	x_increment;
-	double	y_increment;
-	int		num_steps;
+	struct s_position	delta;
+	struct s_position	increment;
+	struct s_position	point;
+	int					num_steps;
 
-	dx = p2->position->x - p1->position->x;
-	dy = p2->position->y - p1->position->y;
-	num_steps = (int)round(fmax(fabs(dx), fabs(dy)));
-	x_increment = dx / num_steps;
-	y_increment = dy / num_steps;
+	point.x = p1->position->x;
+	point.y = p1->position->y;
+	delta.x = p2->position->x - p1->position->x;
+	delta.y = p2->position->y - p1->position->y;
+	num_steps = (int)round(fmax(fabs(delta.x), fabs(delta.y)));
+	increment.x = delta.x / num_steps;
+	increment.y = delta.y / num_steps;
 	while (num_steps--)
 	{
-		if ((int)p1->position->x + ((int)p1->position->y * framebuffer->width) \
+		if ((int)point.x + ((int)point.y * framebuffer->width) \
 			< framebuffer->length)
 		{
 			framebuffer->pixels[\
-				(int)p1->position->x + \
-				((int)p1->position->y * framebuffer->width) \
+				(int)point.x + \
+				((int)point.y * framebuffer->width) \
 			] = p1->color;
 		}
-		p1->position->x += x_increment;
-		p1->position->y += y_increment;
+		point.x += increment.x;
+		point.y += increment.y;
 	}
 }
-
-// static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
-// {
-// 	unsigned int	length;
-
-// 	length = 0;
-// 	while (length < framebuffer->length)
-// 	{
-// 		framebuffer->pixels[length] = 0xFFFF0000;
-// 		length++;
-// 	}
-// put_line_on_framebuffer(framebuffer, map->address[0],
-// }
 
 static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 {
@@ -76,6 +64,7 @@ static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 	unsigned int	i;
 	unsigned int	j;
 
+	transform();
 	length = 0;
 	while (length < map->length)
 	{
@@ -83,17 +72,13 @@ static void	init_framebuffer(t_framebuffer framebuffer, t_map map)
 		j = length / map->width;
 		if (i < map->width - 1)
 		{
-			put_line_on_framebuffer(
-				framebuffer,
-				transform_one_from(map->address[length]),
-				transform_two_from(map->address[length + 1]));
+			put_line_on_framebuffer(framebuffer,
+				map->address[length], map->address[length + 1]);
 		}
 		if (j < map->height - 1)
 		{
-			put_line_on_framebuffer(
-				framebuffer,
-				transform_one_from(map->address[length]),
-				transform_two_from(map->address[length + map->width]));
+			put_line_on_framebuffer(framebuffer,
+				map->address[length], map->address[length + map->width]);
 		}
 		length++;
 	}

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	normalize_z(t_point point)
 {
@@ -75,11 +76,11 @@ void	centralize(t_point point)
 
 	shared = get_shared();
 	point->position->x += \
-		(shared->framebuffer->width - (shared->map->width * \
-		(get_scale_x()) \
-		)) / 2;
+		abs(get_min_x() - \
+		(((double)shared->framebuffer->width / 2.0) - \
+		(abs(get_max_x() - get_min_x()) / 2.0)));
 	point->position->y += \
-		(shared->framebuffer->height - (shared->map->height * \
-		(get_scale_y()) \
-		)) / 2;
+		abs(get_min_y() - \
+		(((double)shared->framebuffer->height / 2.0) - \
+		(abs(get_max_y() - get_min_y()) / 2.0)));
 }

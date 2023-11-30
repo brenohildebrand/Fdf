@@ -28,7 +28,8 @@ SOURCES = \
 	window.c \
 	transform.c \
 	another_utils.c \
-	transformations.c
+	transformations.c \
+	yet_another_utils.c
 
 OBJECTS = \
 	main.o \
@@ -43,7 +44,8 @@ OBJECTS = \
 	window.o \
 	transform.o \
 	another_utils.o \
-	transformations.o
+	transformations.o \
+	yet_another_utils.o
 
 HEADERS = \
 	fdf.h

@@ -91,8 +91,6 @@ unsigned int	get_true_map_width(void);
 void			create_framebuffer_from_map(void);
 void			create_window_from_framebuffer(void);
 void			put_pixel(int x, int y, int color);
-t_point			transform_one_from(t_point point);
-t_point			transform_two_from(t_point point);
 void			newline_update(void);
 void			isometrify(t_point point);
 void			scale(t_point point);
@@ -102,5 +100,10 @@ double			get_max_z(void);
 double			get_min_z(void);
 double			get_scale_x(void);
 double			get_scale_y(void);
+double			get_max_y(void);
+double			get_min_y(void);
+void			transform(void);
+double			get_max_x(void);
+double			get_min_x(void);
 
 #endif

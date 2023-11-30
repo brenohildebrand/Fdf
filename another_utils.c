@@ -82,9 +82,3 @@ double	get_scale_y(void)
 {
 	return (get_scale_x());
 }
-// static double	scale_y = 0;
-// t_shared		shared;
-
-// shared = get_shared();
-// if (scale_y == 0)
-// return (scale_y);
