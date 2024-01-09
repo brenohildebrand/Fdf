@@ -16,6 +16,7 @@
 static t_framebuffer	create_framebuffer(void)
 {
 	t_framebuffer	framebuffer;
+	unsigned int	i;
 
 	framebuffer = custom_malloc(sizeof(struct s_framebuffer));
 	framebuffer->width = WIDTH;
@@ -23,6 +24,9 @@ static t_framebuffer	create_framebuffer(void)
 	framebuffer->length = framebuffer->width * framebuffer->height;
 	framebuffer->size = framebuffer->width * framebuffer->height * sizeof(int);
 	framebuffer->pixels = custom_malloc(framebuffer->size);
+	i = framebuffer->length;
+	while (i--)
+		framebuffer->pixels[i] = 0;
 	return (framebuffer);
 }
 

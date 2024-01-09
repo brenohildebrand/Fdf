@@ -37,7 +37,6 @@ static int	esc_hook(int keycode, void *ptr)
 		shared = get_shared();
 		mlx_destroy_window(shared->window->mlx, shared->window->window);
 		mlx_destroy_display(shared->window->mlx);
-		exit(0);
 	}
 	return (0);
 }
@@ -50,7 +49,6 @@ static int	close_hook(void *ptr)
 	shared = get_shared();
 	mlx_destroy_window(shared->window->mlx, shared->window->window);
 	mlx_destroy_display(shared->window->mlx);
-	exit(0);
 	return (0);
 }
 

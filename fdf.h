@@ -79,6 +79,7 @@ struct s_window {
 };
 
 t_shared		get_shared(void);
+void			free_shared(void);
 void			print(char *message);
 void			validate_args(void);
 void			read_file(void);

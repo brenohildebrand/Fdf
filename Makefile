@@ -13,7 +13,7 @@
 NAME = fdf
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -Ofast
 
 SOURCES = \
 	main.c \

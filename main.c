@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	create_map_from_file();
 	create_framebuffer_from_map();
 	create_window_from_framebuffer();
-	exit(0);
+	free_shared();
+	return (0);
 }
-
-// free_shared();

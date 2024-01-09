@@ -26,11 +26,15 @@ static void	resize_file(t_file file)
 {
 	unsigned char	*new_address;
 	unsigned int	size;
+	unsigned int	i;
 
 	if (file->size == 0)
 	{
 		file->size = 4096 * sizeof(unsigned char);
 		file->address = custom_malloc(file->size);
+		i = file->size;
+		while (i--)
+			file->address[i] = 0;
 	}
 	else
 	{
