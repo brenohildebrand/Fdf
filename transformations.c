@@ -76,11 +76,11 @@ void	centralize(t_point point)
 
 	shared = get_shared();
 	point->position->x += \
-		abs(get_min_x() - \
+		fabs(get_min_x() - \
 		(((double)shared->framebuffer->width / 2.0) - \
-		(abs(get_max_x() - get_min_x()) / 2.0)));
+		(fabs(get_max_x() - get_min_x()) / 2.0)));
 	point->position->y += \
-		abs(get_min_y() - \
+		fabs(get_min_y() - \
 		(((double)shared->framebuffer->height / 2.0) - \
-		(abs(get_max_y() - get_min_y()) / 2.0)));
+		(fabs(get_max_y() - get_min_y()) / 2.0)));
 }

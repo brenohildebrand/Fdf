@@ -31,6 +31,7 @@ static int	esc_hook(int keycode, void *ptr)
 {
 	t_shared	shared;
 
+	(void)ptr;
 	if (keycode == 65307)
 	{
 		shared = get_shared();
@@ -38,6 +39,19 @@ static int	esc_hook(int keycode, void *ptr)
 		mlx_destroy_display(shared->window->mlx);
 		exit(0);
 	}
+	return (0);
+}
+
+static int	close_hook(void *ptr)
+{
+	t_shared	shared;
+
+	(void)ptr;
+	shared = get_shared();
+	mlx_destroy_window(shared->window->mlx, shared->window->window);
+	mlx_destroy_display(shared->window->mlx);
+	exit(0);
+	return (0);
 }
 
 static void	init_window(t_window window, t_framebuffer framebuffer)
@@ -57,6 +71,7 @@ static void	init_window(t_window window, t_framebuffer framebuffer)
 		length++;
 	}
 	mlx_key_hook(window->window, esc_hook, NULL);
+	mlx_hook(window->window, 17, 1L << 3, close_hook, NULL);
 	mlx_loop(window->mlx);
 }
 
