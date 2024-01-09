@@ -3,24 +3,70 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/12 17:47:04 by bhildebr          #+#    #+#              #
-#    Updated: 2023/11/08 16:35:25 by bhildebr         ###   ########.fr        #
+#    Created: 2023/11/21 05:26:41 by marvin            #+#    #+#              #
+#    Updated: 2023/11/21 05:26:41 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-$(NAME): all
+CC = gcc
+CFLAGS = -g -Wall -Wextra -Werror
 
-all:
-	cc -Wall -Wextra -Werror src/*.c kit/actions/*.c vendor/MLX42/build/libmlx42.a -o $(NAME) -ldl -lpthread -lglfw -lm -g -Ivendor/MLX42/include
+SOURCES = \
+	main.c \
+	shared.c \
+	print.c \
+	args.c \
+	file.c \
+	map.c \
+	utils.c \
+	point.c \
+	framebuffer.c \
+	window.c \
+	transform.c \
+	another_utils.c \
+	transformations.c \
+	yet_another_utils.c
 
-valgrind:	all
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=./supression.sup ./fdf
+OBJECTS = \
+	main.o \
+	shared.o \
+	print.o \
+	args.o \
+	file.o \
+	map.o \
+	utils.o \
+	point.o \
+	framebuffer.o \
+	window.o \
+	transform.o \
+	another_utils.o \
+	transformations.o \
+	yet_another_utils.o
 
-valgrind_bonus:	bonus
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=./supression.sup ./fdf_bonus
+HEADERS = \
+	fdf.h
 
-.PHONY: $(NAME) all
+all: norm $(NAME)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+norm:
+	@norminette $(SOURCES) $(HEADERS)
+
+$(NAME): $(OBJECTS)
+	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11 -lm
+
+clean:
+	@$(RM) $(OBJECTS)
+
+fclean: clean
+	@$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all $(NAME) clean fclean re norm
