@@ -36,6 +36,11 @@ void	free_shared(void)
 	}
 	if (shared->map)
 	{
+		while (shared->map->length--)
+		{
+			free(shared->map->address[shared->map->length]->position);
+			free(shared->map->address[shared->map->length]);
+		}
 		free(shared->map->address);
 		free(shared->map);
 	}
@@ -45,7 +50,5 @@ void	free_shared(void)
 		free(shared->framebuffer);
 	}
 	if (shared->window)
-	{
 		free(shared->window);
-	}
 }

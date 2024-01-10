@@ -24,32 +24,8 @@ static t_window	create_window(void)
 	window->window = mlx_new_window(window->mlx, WIDTH, HEIGHT, "Fdf");
 	if (window->window == (void *)0)
 		raise_error(249);
+	window->should_close = 0;
 	return (window);
-}
-
-static int	esc_hook(int keycode, void *ptr)
-{
-	t_shared	shared;
-
-	(void)ptr;
-	if (keycode == 65307)
-	{
-		shared = get_shared();
-		mlx_destroy_window(shared->window->mlx, shared->window->window);
-		mlx_destroy_display(shared->window->mlx);
-	}
-	return (0);
-}
-
-static int	close_hook(void *ptr)
-{
-	t_shared	shared;
-
-	(void)ptr;
-	shared = get_shared();
-	mlx_destroy_window(shared->window->mlx, shared->window->window);
-	mlx_destroy_display(shared->window->mlx);
-	return (0);
 }
 
 static void	init_window(t_window window, t_framebuffer framebuffer)
@@ -70,6 +46,7 @@ static void	init_window(t_window window, t_framebuffer framebuffer)
 	}
 	mlx_key_hook(window->window, esc_hook, NULL);
 	mlx_hook(window->window, 17, 1L << 3, close_hook, NULL);
+	mlx_loop_hook(window->mlx, loop_hook, NULL);
 	mlx_loop(window->mlx);
 }
 
@@ -80,4 +57,6 @@ void	create_window_from_framebuffer(void)
 	shared = get_shared();
 	shared->window = create_window();
 	init_window(shared->window, shared->framebuffer);
+	mlx_destroy_display(shared->window->mlx);
+	free(shared->window->mlx);
 }

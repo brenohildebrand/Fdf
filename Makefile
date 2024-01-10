@@ -25,6 +25,7 @@ SOURCES = \
 	utils.c \
 	point.c \
 	framebuffer.c \
+	hooks.c \
 	window.c \
 	transform.c \
 	another_utils.c \
@@ -41,6 +42,7 @@ OBJECTS = \
 	utils.o \
 	point.o \
 	framebuffer.o \
+	hooks.o \
 	window.o \
 	transform.o \
 	another_utils.o \

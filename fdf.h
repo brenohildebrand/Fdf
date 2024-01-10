@@ -76,6 +76,7 @@ struct s_window {
 	void	*mlx;
 	void	*window;
 	void	*image;
+	int		should_close;
 };
 
 t_shared		get_shared(void);
@@ -106,5 +107,8 @@ double			get_min_y(void);
 void			transform(void);
 double			get_max_x(void);
 double			get_min_x(void);
+int				close_hook(void *ptr);
+int				esc_hook(int keycode, void *ptr);
+int				loop_hook(void *ptr);
 
 #endif
