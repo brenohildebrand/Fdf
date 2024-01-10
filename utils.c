@@ -57,8 +57,12 @@ void	put_pixel(int x, int y, int color)
 {
 	t_shared	shared;
 	t_window	window;
+	char		*dst;
 
 	shared = get_shared();
 	window = shared->window;
-	mlx_pixel_put(window->mlx, window->window, x, y, color);
+	dst = window->addr + \
+		(y * window->line_length + x * \
+		(window->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

@@ -76,6 +76,10 @@ struct s_window {
 	void	*mlx;
 	void	*window;
 	void	*image;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	int		should_close;
 };
 
