@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = fdf
+MINILIBX = minilibx-linux/minilibx.a
 
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror
@@ -52,7 +53,7 @@ OBJECTS = \
 HEADERS = \
 	fdf.h
 
-all: norm $(NAME)
+all: norm $(MINILIBX) $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -63,12 +64,16 @@ norm:
 $(NAME): $(OBJECTS)
 	@cc  -o $(NAME) $(OBJECTS) minilibx-linux/libmlx.a -lXext -lX11 -lm
 
+$(MINILIBX):
+	@cd minilibx-linux && ./configure
+
 clean:
 	@$(RM) $(OBJECTS)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(MINILIBX)
 
 re: fclean all
 
-.PHONY: all $(NAME) clean fclean re norm
+.PHONY: all $(MINILIBX) $(NAME) clean fclean re norm

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static t_framebuffer	create_framebuffer(void)
 {
@@ -33,7 +34,9 @@ static void	put_line_on_framebuffer(
 	t_framebuffer framebuffer,
 	t_point p1,
 	t_point p2
-sition	increment;
+){
+	struct s_position	delta;
+	struct s_position	increment;
 	struct s_position	point;
 	int					num_steps;
 
