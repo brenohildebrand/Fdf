@@ -50,7 +50,8 @@ static void	resize_map(t_map map)
 		free(map->address);
 		map->size *= 2;
 		map->address = new_address;
-	}
+	}#include <stdio.h>
+
 }
 
 static void	push_point_to_map(t_point point, t_map map)

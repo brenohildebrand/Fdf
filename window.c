@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static t_window	create_window(void)
 {

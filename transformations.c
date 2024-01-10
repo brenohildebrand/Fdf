@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	normalize_z(t_point point)
 {
@@ -28,7 +27,8 @@ void	normalize_z(t_point point)
 			(double)(point->position->z - min_z) * \
 			(1.0 / (double)(max_z - min_z));
 	}
-}
+}#include <stdio.h>
+
 
 void	scale(t_point point)
 {
