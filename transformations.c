@@ -36,9 +36,9 @@ void	scale(t_point point)
 
 	shared = get_shared();
 	point->position->x *= \
-		get_scale_x();
+		get_scale_x() * 1.15;
 	point->position->y *= \
-		get_scale_y();
+		get_scale_y() * 1.15;
 }
 
 void	isometrify(t_point point)

@@ -24,6 +24,7 @@ void	*custom_malloc(unsigned int size)
 
 void	raise_error(unsigned char exit_code)
 {
+	free_shared();
 	print("An error ocurred.");
 	exit(exit_code);
 }
